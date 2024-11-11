@@ -52,12 +52,10 @@ public class WebSocketClientService {
 
     public void sendGpsMessage(GpsMessage gpsMessage) {
         try {
-            Map<String, Double> coordinates = parseCoordinates(gpsMessage.getNavPosllh());
-
             Map<String, Object> message = new HashMap<>();
             Map<String, Object> position = new HashMap<>();
-            position.put("longitude", coordinates.getOrDefault("longitude", 0.0));
-            position.put("latitude", coordinates.getOrDefault("latitude", 0.0));
+            position.put("longitude", gpsMessage.getLongitude());
+            position.put("latitude", gpsMessage.getLatitude());
 
             Map<String, Object> values = new HashMap<>();
             values.put("path", "navigation.position");

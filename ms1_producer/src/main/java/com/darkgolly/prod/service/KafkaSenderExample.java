@@ -21,13 +21,7 @@ public class KafkaSenderExample {
     public void sendMessage(String topicName, Object message) {
         kafkaTemplate.send(topicName, message).whenComplete(
                 (result, ex) -> {
-                    if (ex == null) {
-                        log.info(
-                                "message:{} was sent, offset:{}",
-                                message,
-                                result.getRecordMetadata().offset());
-                    }
-                    else {
+                    if (ex != null) {
                         log.error("message:{} was not sent", message, ex);
                     }
                 }

@@ -27,7 +27,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
 
-        if (payload.contains("NAV_POSLLH") || payload.contains("NAV_STATUS")) {
+        if (payload.contains("Longitude")) {
             GpsMessage gpsMessage = objectMapper.readValue(payload, GpsMessage.class);
             kafkaSenderExample.sendMessage("gps_topic", gpsMessage);
             // System.out.println("Received GPS Message: " + gpsMessage);

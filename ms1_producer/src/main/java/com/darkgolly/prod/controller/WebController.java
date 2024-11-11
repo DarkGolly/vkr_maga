@@ -14,7 +14,7 @@ public class WebController {
     @Autowired
     KafkaSenderExample kafkaSenderExample;
 
-    @GetMapping("/api/v1/hello")
+    /*@GetMapping("/api/v1/hello")
     private Mono<GpsMessage> hello() {
 
         var msg = new GpsMessage();
@@ -24,6 +24,6 @@ public class WebController {
         kafkaSenderExample.sendMessage("gps_topic", msg);
 
         return Mono.just(msg);
-    }
+    }*/
 
 }
