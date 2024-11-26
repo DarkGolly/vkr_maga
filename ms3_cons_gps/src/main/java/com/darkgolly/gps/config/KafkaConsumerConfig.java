@@ -24,6 +24,9 @@ public class KafkaConsumerConfig {
     @Value("${io.reflectoring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
+    @Value("${spring.kafka.consumer.group-id}")
+    private String groupId;
+
     @Bean
     public ConsumerFactory<String, GpsMessage> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
@@ -33,7 +36,7 @@ public class KafkaConsumerConfig {
         deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
 
-        props.put(ConsumerConfig.GROUP_ID_CONFIG,"group2");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,

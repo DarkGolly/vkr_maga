@@ -1,8 +1,8 @@
 package com.darkgolly.prod.service;
 
-import com.darkgolly.prod.dto.BarMessage;
-import com.darkgolly.prod.dto.GpsMessage;
-import com.darkgolly.prod.dto.ImuMessage;
+import com.darkgolly.prod.model.BarMessage;
+import com.darkgolly.prod.model.GpsMessage;
+import com.darkgolly.prod.model.ImuMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

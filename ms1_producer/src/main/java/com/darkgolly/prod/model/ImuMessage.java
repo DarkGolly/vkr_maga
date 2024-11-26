@@ -1,8 +1,7 @@
-package com.darkgolly.prod.dto;
+package com.darkgolly.prod.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

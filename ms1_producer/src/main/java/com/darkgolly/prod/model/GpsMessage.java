@@ -1,4 +1,4 @@
-package com.darkgolly.prod.dto;
+package com.darkgolly.prod.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
