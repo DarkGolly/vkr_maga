@@ -22,11 +22,6 @@ class KafkaProducerConfig {
     @Value("${io.reflectoring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-/*    @Value("${spring.kafka.producer.properties.sasl.mechanism}")
-    private String saslMechanism;
-
-    @Value("${spring.kafka.producer.properties.sasl.jaas.config}")
-    private String jaasConfig;*/
 
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
@@ -35,10 +30,13 @@ class KafkaProducerConfig {
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
-        // Настройки безопасности SASL/PLAIN
-/*        configProps.put(SecurityConfig.SECURITY_PROVIDERS_CONFIG, "SASL_PLAINTEXT");
-        configProps.put(SaslConfigs.SASL_MECHANISM, saslMechanism);
-        configProps.put(SaslConfigs.SASL_JAAS_CONFIG, jaasConfig);*/
+        configProps.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required\\\n" +
+                "username=\"admin\"\\\n" +
+                "password=\"admin-secret\"\\\n" +
+                "user_admin=\"admin-secret\"\\\n" +
+                "user_user=\"user-secret\";");
+        configProps.put("sasl.mechanism", "PLAIN");
+        configProps.put("security.protocol", "SASL_PLAINTEXT");
 
         return new DefaultKafkaProducerFactory<>(configProps);
     }

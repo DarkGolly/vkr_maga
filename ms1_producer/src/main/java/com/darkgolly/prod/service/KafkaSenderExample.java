@@ -17,7 +17,6 @@ public class KafkaSenderExample {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-
     public void sendMessage(String topicName, Object message) {
         kafkaTemplate.send(topicName, message).whenComplete(
                 (result, ex) -> {
@@ -27,5 +26,4 @@ public class KafkaSenderExample {
                 }
         );
     }
-
 }
