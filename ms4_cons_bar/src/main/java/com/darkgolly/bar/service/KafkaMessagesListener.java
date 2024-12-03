@@ -1,14 +1,14 @@
-package com.example.demo.service;
+package com.darkgolly.bar.service;
 
-import com.example.demo.dto.BarMessage;
+import com.darkgolly.bar.model.BarMessage;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaListenersExample {
+public class KafkaMessagesListener {
 
 
-    @KafkaListener(topics = "bar_topic", groupId = "group2")
+    @KafkaListener(topics = "${spring.kafka.consumer.properties.topics}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenGpsTopic(BarMessage barMessage) {
         System.out.println("Received Barometer Message: " + barMessage);
         // Добавьте вашу логику обработки сообщения

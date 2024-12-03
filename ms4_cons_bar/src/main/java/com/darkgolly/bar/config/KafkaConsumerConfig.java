@@ -1,7 +1,9 @@
-package com.example.demo.config;
+package com.darkgolly.bar.config;
 
-import com.example.demo.dto.BarMessage;
+import com.darkgolly.bar.model.BarMessage;
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.config.SaslConfigs;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +23,11 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
-    @Value("${io.reflectoring.kafka.bootstrap-servers}")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
+
+    @Value("${spring.kafka.consumer.group-id}")
+    private String groupId;
 
     @Bean
     public ConsumerFactory<String, BarMessage> consumerFactory() {
@@ -32,16 +38,19 @@ public class KafkaConsumerConfig {
         deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
 
-        props.put(ConsumerConfig.GROUP_ID_CONFIG,"group2");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
 
+        props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
+        props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
+        props.put(SaslConfigs.SASL_JAAS_CONFIG, "org.apache.kafka.common.security.plain.PlainLoginModule required" +
+                " username=\"admin\" password=\"admin-secret\" user_admin=\"admin-secret\" user_alice=\"alice-secret\";");
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
     }
-
 
     @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, BarMessage>> kafkaListenerContainerFactory() {

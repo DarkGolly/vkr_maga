@@ -15,7 +15,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 public class MyWebSocketHandler extends TextWebSocketHandler {
 
     @Autowired
-    private KafkaSenderExample kafkaSenderExample;
+    private KafkaMessageProducer kafkaSenderExample;
     private final ObjectMapper objectMapper;
 
     @Autowired

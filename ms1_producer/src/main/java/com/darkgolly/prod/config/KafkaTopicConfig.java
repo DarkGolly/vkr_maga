@@ -9,18 +9,27 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic gpsTopic(){
+    public NewTopic gpsTopic() {
         return TopicBuilder.name("gps_topic")
+                .partitions(3)
+                .replicas(1)
                 .build();
     }
+
     @Bean
-    public NewTopic imuTopic(){
+    public NewTopic imuTopic() {
         return TopicBuilder.name("imu_topic")
+                .partitions(3)
+                .replicas(1)
                 .build();
     }
+
     @Bean
-    public NewTopic barTopic(){
+    public NewTopic barTopic() {
         return TopicBuilder.name("bar_topic")
+                .partitions(3)
+                .replicas(1)
                 .build();
     }
 }
+

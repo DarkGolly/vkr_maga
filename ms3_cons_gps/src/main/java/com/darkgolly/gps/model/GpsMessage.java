@@ -1,4 +1,4 @@
-package com.darkgolly.gps.dto;
+package com.darkgolly.gps.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

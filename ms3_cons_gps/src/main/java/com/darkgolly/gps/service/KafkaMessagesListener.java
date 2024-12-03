@@ -1,18 +1,18 @@
 package com.darkgolly.gps.service;
 
-import com.darkgolly.gps.dto.GpsMessage;
+import com.darkgolly.gps.model.GpsMessage;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaListenersExample {
+public class KafkaMessagesListener {
     private final WebSocketClientService webSocketClientService;
 
-    public KafkaListenersExample(WebSocketClientService webSocketClientService) {
+    public KafkaMessagesListener(WebSocketClientService webSocketClientService) {
         this.webSocketClientService = webSocketClientService;
     }
 
-    @KafkaListener(topics = "gps_topic", groupId = "group2")
+    @KafkaListener(topics = "${spring.kafka.consumer.properties.topics}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenGpsTopic(GpsMessage gpsMessage) {
         System.out.println("Received GPS Message: " + gpsMessage);
         // Добавьте вашу логику обработки сообщения

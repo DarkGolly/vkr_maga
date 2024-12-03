@@ -1,7 +1,9 @@
 package com.darkgolly.gps.config;
 
-import com.darkgolly.gps.dto.GpsMessage;
+import com.darkgolly.gps.model.GpsMessage;
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.config.SaslConfigs;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +23,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
-    @Value("${io.reflectoring.kafka.bootstrap-servers}")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     @Value("${spring.kafka.consumer.group-id}")
@@ -43,10 +45,12 @@ public class KafkaConsumerConfig {
                 StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
 
-
+        props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
+        props.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
+        props.put(SaslConfigs.SASL_JAAS_CONFIG, "org.apache.kafka.common.security.plain.PlainLoginModule required" +
+                " username=\"admin\" password=\"admin-secret\" user_admin=\"admin-secret\" user_alice=\"alice-secret\";");
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
     }
-
 
     @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, GpsMessage>> kafkaListenerContainerFactory() {

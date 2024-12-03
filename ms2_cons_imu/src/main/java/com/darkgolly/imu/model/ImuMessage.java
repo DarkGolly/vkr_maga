@@ -1,4 +1,4 @@
-package com.darkgolly.imu.dto;
+package com.darkgolly.imu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

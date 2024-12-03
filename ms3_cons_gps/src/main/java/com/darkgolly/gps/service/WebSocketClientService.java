@@ -1,6 +1,6 @@
 package com.darkgolly.gps.service;
 
-import com.darkgolly.gps.dto.GpsMessage;
+import com.darkgolly.gps.model.GpsMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
