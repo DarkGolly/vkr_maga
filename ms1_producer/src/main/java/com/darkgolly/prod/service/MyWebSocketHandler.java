@@ -15,7 +15,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 public class MyWebSocketHandler extends TextWebSocketHandler {
 
     @Autowired
-    private KafkaMessageProducer kafkaSenderExample;
+    private KafkaMessageProducer kafkaMessageProducer;
     private final ObjectMapper objectMapper;
 
     @Autowired
@@ -29,15 +29,15 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
         if (payload.contains("Longitude")) {
             GpsMessage gpsMessage = objectMapper.readValue(payload, GpsMessage.class);
-            kafkaSenderExample.sendMessage("gps_topic", gpsMessage);
+            kafkaMessageProducer.sendMessage("gps_topic", gpsMessage);
             // System.out.println("Received GPS Message: " + gpsMessage);
         } else if (payload.contains("Acc") || payload.contains("Gyr") || payload.contains("Mag")) {
             ImuMessage imuMessage = objectMapper.readValue(payload, ImuMessage.class);
-            kafkaSenderExample.sendMessage("imu_topic", imuMessage);
+            kafkaMessageProducer.sendMessage("imu_topic", imuMessage);
             // System.out.println("Received IMU Message: " + imuMessage);
         } else if (payload.contains("Temperature") || payload.contains("Pressure")) {
             BarMessage barMessage = objectMapper.readValue(payload, BarMessage.class);
-            kafkaSenderExample.sendMessage("bar_topic", barMessage);
+            kafkaMessageProducer.sendMessage("bar_topic", barMessage);
             // System.out.println("Received Bar Message: " + barMessage);
         } else {
             System.out.println("Received unknown message type");
