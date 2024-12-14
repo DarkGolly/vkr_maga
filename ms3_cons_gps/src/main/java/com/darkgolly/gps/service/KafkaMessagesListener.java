@@ -15,7 +15,6 @@ public class KafkaMessagesListener {
     @KafkaListener(topics = "${spring.kafka.consumer.properties.topics}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenGpsTopic(GpsMessage gpsMessage) {
         System.out.println("Received GPS Message: " + gpsMessage);
-        // Добавьте вашу логику обработки сообщения
         webSocketClientService.sendGpsMessage(gpsMessage);
     }
 

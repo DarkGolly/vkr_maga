@@ -28,17 +28,14 @@ public class WebSocketClientService {
                 public void onOpen(ServerHandshake handshakedata) {
                     System.out.println("Connected to WebSocket server");
                 }
-
                 @Override
                 public void onMessage(String message) {
                     System.out.println("Received message from server: " + message);
                 }
-
                 @Override
                 public void onClose(int code, String reason, boolean remote) {
                     System.out.println("Disconnected from WebSocket server: " + reason);
                 }
-
                 @Override
                 public void onError(Exception ex) {
                     ex.printStackTrace();
@@ -73,26 +70,4 @@ public class WebSocketClientService {
             e.printStackTrace();
         }
     }
-
-
-    private Map<String, Double> parseCoordinates(String navPosllh) {
-        Map<String, Double> coordinates = new HashMap<>();
-        try {
-            String[] parts = navPosllh.split(",");
-            for (String part : parts) {
-                String[] keyValue = part.split(":");
-                if (keyValue[0].trim().equalsIgnoreCase("longitude")) {
-                    coordinates.put("longitude", Double.parseDouble(keyValue[1].trim()));
-                } else if (keyValue[0].trim().equalsIgnoreCase("latitude")) {
-                    coordinates.put("latitude", Double.parseDouble(keyValue[1].trim()));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(coordinates.get("longitude")+" "+coordinates.get("latitude"));
-        return coordinates;
-    }
-
-
 }
