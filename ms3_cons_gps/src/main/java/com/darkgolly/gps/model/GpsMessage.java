@@ -11,11 +11,11 @@ public class GpsMessage {
     @JsonProperty("Latitude")
     private double latitude;
     @JsonProperty("height")
-    private Integer height;
+    private double height;
     @JsonProperty("hMSL")
-    private Integer hMSL;
+    private double hMSL;
     @JsonProperty("hAcc")
-    private Integer hAcc;
+    private double hAcc;
     @JsonProperty("vAcc")
-    private Integer vAcc;
+    private double vAcc;
 }

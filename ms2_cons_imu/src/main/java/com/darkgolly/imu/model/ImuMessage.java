@@ -9,11 +9,11 @@ import java.util.List;
 public class ImuMessage {
 
     @JsonProperty("Acc")
-    private List<String> acc;
+    private List<Double> acc;
 
     @JsonProperty("Gyr")
-    private List<String> gyr;
+    private List<Double> gyr;
 
     @JsonProperty("Mag")
-    private List<String> mag;
+    private List<Double> mag;
 }
