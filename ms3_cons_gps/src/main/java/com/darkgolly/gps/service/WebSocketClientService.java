@@ -37,7 +37,7 @@ public class WebSocketClientService {
 
                 @Override
                 public void onMessage(String message) {
-                    System.out.println("Received message from server: " + message);
+                    //System.out.println("Received message from server: " + message);
                 }
 
                 @Override
