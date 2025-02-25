@@ -10,13 +10,22 @@ public class KafkaMessagesListener {
 
     private final WebSocketClientService messageSender;
 
+    private boolean isAuthenticated = false; // Флаг авторизации
+    // Метод для установки авторизации
+    public void authenticate() {
+        this.isAuthenticated = true;
+    }
     @Autowired
     public KafkaMessagesListener(WebSocketClientService messageSender) {
         this.messageSender = messageSender;
     }
 
+
     @KafkaListener(topics = "${spring.kafka.consumer.properties.topics}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenGpsTopic(GpsMessage gpsMessage) {
+        if (!isAuthenticated) {
+            return; // Игнорируем сообщения, если не авторизован
+        }
         messageSender.sendGpsMessage(gpsMessage);
     }
 }

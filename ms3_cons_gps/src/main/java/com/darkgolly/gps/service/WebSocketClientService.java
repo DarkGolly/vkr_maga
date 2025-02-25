@@ -24,10 +24,9 @@ public class WebSocketClientService {
     private static Double lastLongitude = null;
 
     public WebSocketClientService() {
-        connectWebSocket();
     }
 
-    private void connectWebSocket() {
+    public void connectWebSocket() {
         try {
             webSocketClient = new WebSocketClient(new URI("ws://localhost:3000/signalk/v1/stream")) {
                 @Override
