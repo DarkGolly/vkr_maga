@@ -15,11 +15,13 @@ public class KafkaMessagesListener {
     public void authenticate() {
         this.isAuthenticated = true;
     }
+    public void logout() {
+        this.isAuthenticated = false;
+    }
     @Autowired
     public KafkaMessagesListener(WebSocketClientService messageSender) {
         this.messageSender = messageSender;
     }
-
 
     @KafkaListener(topics = "${spring.kafka.consumer.properties.topics}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenGpsTopic(GpsMessage gpsMessage) {

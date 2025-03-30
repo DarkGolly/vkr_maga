@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Welcome</title>
+</head>
+<body>
+<h1>Добро пожаловать, <span th:text="${username}"></span>!</h1>
+<h2>Ваше приложение работает...</h2>
+<p><a th:href="@{/logout}">Выйти чтобы отключиться</a></p>
+</body>
+</html>

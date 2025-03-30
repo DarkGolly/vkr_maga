@@ -18,7 +18,7 @@ public class WebSocketClientService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private WebSocketClient webSocketClient;
-
+    private boolean isConnectedToSignalK = false;
     // Последние координаты для расчета курса
     private static Double lastLatitude = null;
     private static Double lastLongitude = null;
@@ -54,7 +54,21 @@ public class WebSocketClientService {
             e.printStackTrace();
         }
     }
+    public void connectToSignalK() {
+        if (!isConnectedToSignalK) {
+            isConnectedToSignalK = true;
+            connectWebSocket();
+            System.out.println("SignalK connection established.");
+        }
+    }
 
+    public void disconnectToSignalK() {
+        if (isConnectedToSignalK && webSocketClient != null) {
+            isConnectedToSignalK = false;
+            webSocketClient.close();
+            System.out.println("SignalK connection closed.");
+        }
+    }
     public void sendGpsMessage(GpsMessage gpsMessage) {
         try {
             // Вычисляем азимут, если есть предыдущие координаты
