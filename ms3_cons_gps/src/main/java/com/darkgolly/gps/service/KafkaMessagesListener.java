@@ -26,7 +26,7 @@ public class KafkaMessagesListener {
     @KafkaListener(topics = "${spring.kafka.consumer.properties.topics}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenGpsTopic(GpsMessage gpsMessage) {
         if (!isAuthenticated) {
-            return; // Игнорируем сообщения, если не авторизован
+            return;
         }
         messageSender.sendGpsMessage(gpsMessage);
     }
