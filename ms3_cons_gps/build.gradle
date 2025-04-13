@@ -29,12 +29,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation group: 'org.java-websocket', name: 'Java-WebSocket', version: '1.5.7'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.4.2'
-//	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '3.4.2'
 	implementation group: 'com.google.zxing', name: 'core', version: '3.5.3'
 	implementation group: 'com.google.zxing', name: 'javase', version: '3.5.3'
 	implementation group: 'com.eatthepath', name: 'java-otp', version: '0.4.0'
 //	implementation group: 'com.warrenstrange', name: 'googleauth', version: '1.5.0'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-resource-server', version: '3.3.5'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '3.4.2'
 
 	compileOnly 'org.projectlombok:lombok'
